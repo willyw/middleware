@@ -1,0 +1,49 @@
+<% form_for @product , :html => { :multipart => true } do |f| %>
+	<%= f.file_field :photo , :id => "uploadify"%>
+	<%= submit_tag "Save"%>
+<% end %>
+
+
+<div class="clearfix">
+	<% for product  in @products%>
+		<%= image_tag product.photo.url(:small) %>
+	<% end%>
+</div>
+
+
+<%- session_key_name = ActionController::Base.session_options[:key] -%>
+<script type="text/javascript">
+  
+  // $('#uploadify').uploadify({  
+  //     script          : '/admin/assets',
+  //     fileDataName    : 'asset[file]',
+  //     scriptData      : {
+  //       '<%= session_key_name %>' : '<%= u cookies[session_key_name] %>',
+  //       'authenticity_token'  : '<%= u form_authenticity_token if protect_against_forgery? %>'
+  //     }
+  // });
+
+
+	$(document).ready(function(){
+
+		$("#uploadify").uploadify({
+			'uploader'       : '/swf/uploadify.swf',
+			'script'         : $("#new_product").attr('action'),
+			'cancelImg'      : '/images/cancel.png',
+			'fileDataName'    : 'product[photo]',
+			'folder'         : 'uploads',
+			'queueID'        : 'fileQueue', // if you specify this, need to provide script with <div id="fileQueue"></div>
+			'auto'           : true,
+			'multi'          : true,
+			'scriptAccess'   : 'always',
+			'scriptData' 		: {
+        '<%= session_key_name %>' : '<%= u cookies[session_key_name] %>',
+        'authenticity_token'  : encodeURIComponent('<%= u form_authenticity_token if protect_against_forgery? %>')
+      }
+		});
+	});
+	// 
+	// alert("boom boom boom ");
+	// alert("<%= session_key_name %>");
+</script>
+
