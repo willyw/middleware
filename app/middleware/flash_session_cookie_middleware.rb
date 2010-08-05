@@ -11,6 +11,9 @@ class FlashSessionCookieMiddleware
         puts "Here is the env\n"*10
         puts env.inspect 
         req = Rack::Request.new(env)
+        puts req.inspect
+        puts req.class
+        # req.format = :js
         unless req.params[@session_key].nil?
           env['HTTP_COOKIE'] = "#{@session_key}=#{req.params[@session_key]}".freeze
         end
