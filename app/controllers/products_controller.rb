@@ -11,13 +11,16 @@ class ProductsController < ApplicationController
     @product.save
     # render :file => "products/create.js.erb", :layout => false
     # return
+
+    
+    
     respond_to do |request|
       puts "boom boom boom here we are\n"*10
       puts request.js.inspect
       
       
-      request.js{
-        puts "BOOM BOOM BOOM HERE WE ARE"*10
+      request.js {
+        puts "boom, int request.js\n"*10
       }
       
       request.html{

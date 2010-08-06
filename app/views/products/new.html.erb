@@ -30,7 +30,9 @@
 			'multi'          : true,
 			'scriptAccess'   : 'always',
 			onComplete : function(event, queueID, fileObj, response, data ){
-				alert(response);
+				var obj= $.parseJSON( response );
+														
+				alert(obj.product.created_at);
 			},
 			'scriptData' 		: {
 				'from_uploadify' : 'yes',
