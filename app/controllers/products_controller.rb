@@ -15,6 +15,7 @@ class ProductsController < ApplicationController
       puts "boom boom boom here we are\n"*10
       puts request.js.inspect
       
+      
       request.js{
         puts "BOOM BOOM BOOM HERE WE ARE"*10
       }
