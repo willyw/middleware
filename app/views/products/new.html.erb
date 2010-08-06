@@ -6,9 +6,11 @@
 <% end %>
 
 
-<div class="clearfix">
+<ul class="clearfix images" id='container'>
 	<% for product  in @products%>
-		<%= image_tag product.photo.url(:small) %>
+		<li id="product-image-<%= product.id %>">
+			<%= image_tag product.photo.url(:small) %>
+		</li>
 	<% end%>
 </div>
 
@@ -32,7 +34,10 @@
 			onComplete : function(event, queueID, fileObj, response, data ){
 				var obj= $.parseJSON( response );
 														
-				alert(obj.product.created_at);
+				alert(obj.product.id);
+				var $new_loader = $("#loader").clone().attr('id', '').show();
+				$new_loader.appendTo("#container");
+				$new_loader.wrap("<li id='product-image-" + obj.product.id +"' />");
 			},
 			'scriptData' 		: {
 				'from_uploadify' : 'yes',
@@ -46,3 +51,4 @@
 	// alert("<%= session_key_name %>");
 </script>
 
+<img src='/images/ajax-loader.gif' id="loader" style="display:none;" />
