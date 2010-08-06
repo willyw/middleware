@@ -1,1 +1,3 @@
-<%=  @product.to_json %>
+<% dest =  { :destination => check_image_ready_url} %>
+<% final_json =   @product.attributes.merge(dest) %>
+<%= final_json.to_json %>

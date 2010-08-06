@@ -32,12 +32,14 @@
 			'multi'          : true,
 			'scriptAccess'   : 'always',
 			onComplete : function(event, queueID, fileObj, response, data ){
+				// alert(response);
 				var obj= $.parseJSON( response );
 														
-				alert(obj.product.id);
+				// alert(obj.id);
 				var $new_loader = $("#loader").clone().attr('id', '').show();
 				$new_loader.appendTo("#container");
-				$new_loader.wrap("<li id='product-image-" + obj.product.id +"' />");
+				$new_loader.wrap("<li id='product-image-" + obj.id +"' />");
+				getImageReady(obj.id, obj.destination);
 			},
 			'scriptData' 		: {
 				'from_uploadify' : 'yes',

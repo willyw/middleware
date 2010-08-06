@@ -28,9 +28,22 @@ class ProductsController < ApplicationController
         redirect_to new_product_url
         return
       }
-      
-      
     end
+  end
+  
+  def is_ready
+    @product = Product.find_by_id(params[:product_id])
+    if @product.processing == false
+      @data = {
+        :image_location => @product.photo.url(:small),
+        :status => "OK"
+      }
+    else
+      @data = {
+        :status => "NOT_COOL"
+      }
+    end
+ 
     
   end
 end
