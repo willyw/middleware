@@ -1,5 +1,7 @@
 <% form_for @product , :html => { :multipart => true } do |f| %>
 	<%= f.file_field :photo , :id => "uploadify"%>
+	<div id='fileQueue'>
+	</div>
 	<%= submit_tag "Save"%>
 <% end %>
 
